@@ -56,6 +56,15 @@ public class StudentService {
         return StudentDTO.toDTO(studentEntity);
 
     }
+
+    public void update(StudentDTO studentDTO) {
+        StudentEntity studentEntity = StudentEntity.toUpdateEntity(studentDTO);
+        /*
+            save() 에 넘기는 엔티티 객체에 pk 값이 들어있으면 update 쿼리가 나가고
+            pk 값이 없으면 insert 쿼리가 나감.
+         */
+        studentRepository.save(studentEntity);
+    }
 }
 
 

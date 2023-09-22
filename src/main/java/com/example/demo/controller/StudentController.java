@@ -59,6 +59,12 @@ public class StudentController {
         }
     }
 
+    @PostMapping("/student/update")
+    public String update(@ModelAttribute StudentDTO studentDTO) {
+        studentService.update(studentDTO);
+        return "redirect:/students";
+    }
+
 }
 
 
