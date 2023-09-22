@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +40,21 @@ public class StudentService {
             studentDTOList.add(StudentDTO.toDTO(entity));
         });
         return studentDTOList;
+    }
+
+    public StudentDTO findById(Long id) {
+//        Optional<StudentEntity> optionalStudentEntity = studentRepository.findById(id);
+//        if (optionalStudentEntity.isPresent()) {
+//            // 있다
+//            StudentEntity studentEntity = optionalStudentEntity.get();
+//            return StudentDTO.toDTO(studentEntity);
+//        } else {
+//            // 없다
+//            return null;
+//        }
+        StudentEntity studentEntity = studentRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
+        return StudentDTO.toDTO(studentEntity);
+
     }
 }
 

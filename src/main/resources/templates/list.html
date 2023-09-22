@@ -18,7 +18,7 @@
         <td>
             <a th:href="@{|/student/${student.id}|}" th:text="${student.id}"></a>
         </td>
-        <td th:text="${student.studentNumber}"></td>
+        <td th:text="|학번: ${student.studentNumber}|"></td>
         <td th:text="${student.studentName}"></td>
         <td th:text="${student.studentMajor}"></td>
         <td th:text="${student.studentMobile}"></td>

@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,6 +35,17 @@ public class StudentController {
         List<StudentDTO> studentDTOList = studentService.findAll();
         model.addAttribute("studentList", studentDTOList);
         return "list";
+    }
+
+    @GetMapping("/student/{id}")
+    public String findById(@PathVariable("id") Long id, Model model) {
+        try {
+            StudentDTO studentDTO = studentService.findById(id);
+            model.addAttribute("student", studentDTO);
+            return "detail";
+        } catch (NoSuchElementException e) {
+            return "NotFound";
+        }
     }
 
 }
